@@ -1,0 +1,25 @@
+apiVersion: certificates.k8s.io/v1
+
+kind: CertificateSigningRequest
+
+metadata:
+  name: $USERNAME-csr
+
+spec:
+  signerName: kubernetes.io/kube-apiserver-client-kubelet
+
+  # !REQUIRED CONFIG!
+  groups:
+    - system:authenticated
+
+  # 365 days
+  # manual renewal required after expiration
+  expirationSeconds: 31536000
+
+  request: $USERNAME_CERT
+
+  usages:
+    - digital signature
+    - key encipherment
+    - client auth
+    # - server auth
