@@ -1,7 +1,7 @@
 # Create RoleBinding for a user
 
 ```bash
-bash commands/add-user.sh -u john-wick -n staging -r read -c minikube -s https://127.0.0.1:65022
+bash commands/add-user.sh -u john-wick -n staging -r read -c minikube -s https://127.0.0.1:49606
 
 Usage: $0
     -u john
@@ -50,7 +50,7 @@ minikube start
 
 kubectl create namespace staging
 
-bash user-cert-generate_no_ca.sh -u john -n staging -r read -c minikube -s https://127.0.0.1:55131
+bash commands/add-user.sh -u john-wick -n staging -r read -c minikube -s https://127.0.0.1:50092
 
 # check with
 
@@ -58,5 +58,9 @@ kubectl --kubeconfig results/john-wick-config config get-contexts
 
 # or
 
-kubectl create -f https://k8s.io/examples/application/deployment.yaml
+kubectl --kubeconfig results/john-wick-config create -f https://k8s.io/examples/application/deployment.yaml
+
+# remove with
+
+bash commands/remove-user.sh -u john-wick -n staging -r read -c minikube
 ```
